@@ -193,12 +193,15 @@
     }
 
     .container {
-        position: relative;
-        height: 100%;
+        /* position: relative; */
+        /* height: 100%; */
         background: rgba(255, 255, 255, 0.8);
-        margin-top: 100px;
+        /* margin-top: 100px; */
         text-align: left;
         border-radius: 10px;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
     }
 
     .container>h3 {
@@ -285,7 +288,7 @@
     var all = $('#all').html();
     if(all<0){
         $('#over').html('破产倒闭');
-        console.log($('.right').find('.btn'));
+        // console.log($('.right').find('.btn'));
         $('.right').find('.btn').addClass("disabled");
     }
 </script>
