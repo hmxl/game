@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./bootstrap/css/bootstrap.css">
+    <script src="./jQuery/jquery-1.11.2.min.js"></script>
+    <script src="./bootstrap/js/bootstrap.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div class="col-xs-4 col-xs-offset-4 container">
+        <h3>村鸟网络商学院-沙盘游戏</h3>
+        <form class="form-horizontal" autocomplete="off" action="0.php">
+            <div class="form-group">
+                <label for="email" class="col-sm-3 control-label">国家名：</label>
+                <div class="col-sm-8">
+                    <select class="form-control" id="name">
+                        <option>请选择</option>
+                        <option>中国</option>
+                        <option>北欧</option>
+                        <option>西欧</option>
+                        <option>阿拉伯</option>
+                        <option>亚洲</option>
+                        <option>美洲</option>
+                    </select>
+                </div>
+            </div>
+            <p id="tip" class="text-danger"></p>
+            <div class="form-group" style="margin-top: 40px">
+                <button type="button" class="btn btn-info" onclick="startGame()">开始游戏</button>
+                <button type="button" class="btn btn-link" data-toggle="modal" data-target="#myModal">游戏规则</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="modal fade " id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">游戏规则</h4>
+                </div>
+                <div class="modal-body">
+                    <p>1、国家在后台进行配置，配置完成后，在前台进行展示</p>
+                    <p>2、点击【开始游戏】，显示3s倒计时，进入游戏状态，展示动画效果</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<style>
+    *{
+        padding: 0;
+        margin: 0;
+    }
+    body{
+        background: url("./img/bg.jpg");
+        background-repeat:no-repeat ;
+        background-size:100% 100%;
+        background-attachment: fixed;
+        /* background: black; */
+    }
+    .container{
+        position: relative;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.8);   
+        margin-top: 200px;    
+        text-align: center;
+        border-radius: 10px;
+    }
+    .container>h3{
+        margin-bottom: 40px;
+    }
+    .btn:focus,
+    .btn:active:focus,
+    .btn.active:focus,
+    .btn.focus,
+    .btn:active.focus,
+    .btn.active.focus {
+        outline: none;
+    }
+</style>
+<script>
+    function startGame(){
+        var name = $('#name').val();
+        if(name != "请选择"){
+            $('#tip').html("");
+            window.location.href="./start.html";
+            localStorage.setItem("name",name);
+        }else{
+            $('#tip').html("请选择国家名!");
+        }
+    }
+    
+</script>

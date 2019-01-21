@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="./bootstrap/css/bootstrap.css">
+        <link rel="stylesheet" href="./font/iconfont.css">
+        <script src="./jQuery/jquery-1.11.2.min.js"></script>
+        <script src="./bootstrap/js/bootstrap.js"></script>
+        <title>Document</title>
+    </head>
+
+    <body>
+        <div class="col-xs-12 container">
+            <h3 style='text-align: center'>村鸟网络商学院-沙盘游戏</h3>
+            <h4>国家名：<span id="name"></span>
+                <button type="button" class="btn btn-link" data-toggle="modal" data-target="#myModal">游戏规则</button>
+            </h4>
+            <h4>day1</h4>
+            <div class="main">
+                <div class="left">
+                    <div>
+                        <p>银币总额</p>
+                        <p id="all" style="font-size: 20px;" class="text-danger">-1</p>
+                        <p style="background: #d9534f;color: #fff;font-size: 16px;text-align: center" id="over"></p>
+                    </div>
+                </div>
+                <div class="right">
+                    <div>
+                        <div class="title">
+                            <span>铁矿</span>
+                            <img src="./img/level.png">
+                            <span id="ore-level" class="text-danger">1</span>
+                            <!-- <span class="iconfont icon-dengji">1</span> -->
+                            <!-- <span id="ore-level">1</span> -->
+                        </div>
+                        <div class="time">
+                            <span>日期：</span>
+                            <span class="date">2019-1-21</span>
+                        </div>
+                        <div class="btns">
+                            <button type="button" class="btn btn-success" disabled>创建</button>
+                            <button type="button" class="btn btn-warning" disabled>升级</button>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="title">
+                            <span>林场</span>
+                            <img src="./img/level.png">
+                            <span id="forest-level" class="text-danger">1</span>
+                        </div>
+                        <div class="time">
+                            <span>日期：</span>
+                            <span class="date">2019-1-21</span>
+                        </div>
+                        <div class="btns">
+                            <button type="button" class="btn btn-success">创建</button>
+                            <button type="button" class="btn btn-warning">升级</button>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="title">
+                            <span>采石场</span>
+                            <img src="./img/level.png">
+                            <span id="stone-level" class="text-danger">1</span>
+                        </div>
+                        <div class="time">
+                            <span>日期：</span>
+                            <span class="date">2019-1-21</span>
+                        </div>
+                        <div class="btns">
+                            <button type="button" class="btn btn-success">创建</button>
+                            <button type="button" class="btn btn-warning">升级</button>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="title">
+                            <span>耕田</span>
+                            <img src="./img/level.png">
+                            <span id="filed-level" class="text-danger">1</span>
+                        </div>
+                        <div class="time">
+                            <span>日期：</span>
+                            <span class="date">2019-1-21</span>
+                        </div>
+                        <div class="btns">
+                            <button type="button" class="btn btn-success">创建</button>
+                            <button type="button" class="btn btn-warning">升级</button>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="title">
+                            <span>民营</span>
+                            <img src="./img/level.png">
+                            <span id="private-level" class="text-danger">1</span>
+                        </div>
+                        <div class="time">
+                            <span>日期：</span>
+                            <span class="date">2019-1-21</span>
+                        </div>
+                        <div class="btns">
+                            <button type="button" class="btn btn-success">创建</button>
+                            <button type="button" class="btn btn-warning">升级</button>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="title">
+                            <span>铁矿</span>
+                        </div>
+                        <div class="time num">
+                            <span>数量：</span>
+                            <span id="ore" class="text-danger">0</span>
+                            <span>个</span>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="title">
+                            <span>木材</span>
+                        </div>
+                        <div class="time num">
+                            <span>数量：</span>
+                            <span id="forest" class="text-danger">0</span>
+                            <span>个</span>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="title">
+                            <span>石料</span>
+                        </div>
+                        <div class="time num">
+                            <span>数量：</span>
+                            <span id="stone" class="text-danger">0</span>
+                            <span>个</span>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="title">
+                            <span>粮食</span>
+                        </div>
+                        <div class="time num">
+                            <span>数量：</span>
+                            <span id="filed" class="text-danger">0</span>
+                            <span>个</span>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="title">
+                            <span>农民</span>
+                        </div>
+                        <div class="time num">
+                            <span>数量：</span>
+                            <span id="private" class="text-danger">0</span>
+                            <span>个</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="margin: 10px 0;">备注：100万银币：当总资产低于初始资产的40%时，国家宣告灭亡</div>
+        </div>
+
+        <div class="modal fade " id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">游戏规则</h4>
+                </div>
+                <div class="modal-body">
+                    <p>1、初始金币为100万，民营、铁矿、林场、采石场、耕田、初始值等级与数量默认为0</p>
+                    <p>2、100万银币：当总资产低于初始资产的40%时，国家宣告灭亡</p>
+                    <p>3、建造与升级初始状态默认为不可点击</p>
+                    <p>4、每个小组选择一个国家后，根据沙盘操作情况，后台实时统计各个国家的数据统计信息</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    </body>
+
+</html>
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+    }
+
+    body {
+        background: url("./img/bg.jpg");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        background-attachment: fixed;
+    }
+
+    .container {
+        position: relative;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.8);
+        margin-top: 100px;
+        text-align: left;
+        border-radius: 10px;
+    }
+
+    .container>h3 {
+        margin-bottom: 40px;
+    }
+
+    .btn:focus,
+    .btn:active:focus,
+    .btn.active:focus,
+    .btn.focus,
+    .btn:active.focus,
+    .btn.active.focus {
+        outline: none;
+    }
+    .main{
+        display: flex;
+        height: 300px;
+        /* background: #fff; */
+        background: rgba(248, 247, 247, 0.8);
+        font-size: 18px;
+        /* text-align: left; */
+    }
+    .left{
+        width: 15%;
+        border:1px solid #ccc;
+        position: relative;
+    }
+    .left>div{
+        position: absolute;
+        top:50%;
+        left:50%;
+        transform: translate(-50%,-50%);
+        white-space:nowrap;
+    }
+    .right{
+        width: 85%;
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .right>div{
+        width: 20%;
+        height: 50%;
+        border:1px solid #ccc;
+        padding: 20px 5px;
+        position: relative;
+    }
+    .title{
+        font-size: 20px;
+    }
+    .title>img{
+        width: 35px;
+        height: 35px;
+        vertical-align: middle;
+    }
+    .title>span{
+        vertical-align: middle;
+    }
+    .title>span:nth-child(3){
+        margin-left: -10px;
+    }
+    .time{
+        font-size: 14px;
+        position: absolute;
+        bottom: 10px;
+    }
+    .num{
+        font-size: 15px;
+        bottom: 30px;
+    }
+    .btns{
+        position: absolute;
+        right:10px;
+    }
+    .btns>button{
+        display: block;
+        margin-bottom: 10px;
+    }
+</style>
+<script>
+    var name = localStorage.getItem("name");   
+    // console.log(name)
+    $('#name').html(name);
+    
+    var all = $('#all').html();
+    if(all<0){
+        $('#over').html('破产倒闭');
+        console.log($('.right').find('.btn'));
+        $('.right').find('.btn').addClass("disabled");
+    }
+</script>
