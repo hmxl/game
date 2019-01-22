@@ -13,14 +13,13 @@
     </head>
 
     <body>
-        <div class="col-xs-12 container">
+        <div class="col-xs-10 col-xs-offset-1 container">
             <h3 style='text-align: center'>村鸟网络商学院-沙盘游戏</h3>
-            <h4>国家名：<span id="name"></span>
-                <button type="button" class="btn btn-link" data-toggle="modal" data-target="#myModal">游戏规则</button>
+            <h4>国家名：<span id="name"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 16px">建造场地(20)</span>
+
             </h4>
-            <h4>day1</h4>
-            <div class="main">
-                <div class="left">
+            <div id="main">
+                <!-- <div class="left">
                     <div>
                         <p>银币总额</p>
                         <p id="all" style="font-size: 20px;" class="text-danger">-1</p>
@@ -33,8 +32,6 @@
                             <span>铁矿</span>
                             <img src="./img/level.png">
                             <span id="ore-level" class="text-danger">1</span>
-                            <!-- <span class="iconfont icon-dengji">1</span> -->
-                            <!-- <span id="ore-level">1</span> -->
                         </div>
                         <div class="time">
                             <span>日期：</span>
@@ -155,9 +152,11 @@
                             <span>个</span>
                         </div>
                     </div>
-                </div>
+                </div> -->
+                
             </div>
-            <div style="margin: 10px 0;">备注：100万银币：当总资产低于初始资产的40%时，国家宣告灭亡</div>
+            <!-- <div style="margin: 10px 0;">备注：100万银币：当总资产低于初始资产的40%时，国家宣告灭亡</div> -->
+            <button type="button" class="btn btn-link" data-toggle="modal" data-target="#myModal">游戏规则</button>
         </div>
 
         <div class="modal fade " id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
@@ -199,9 +198,9 @@
         /* margin-top: 100px; */
         text-align: left;
         border-radius: 10px;
-        position: absolute;
+        /* position: absolute;
         top: 50%;
-        transform: translateY(-50%);
+        transform: translateY(-50%); */
     }
 
     .container>h3 {
@@ -216,13 +215,24 @@
     .btn.active.focus {
         outline: none;
     }
-    .main{
+    #main{
         display: flex;
-        height: 300px;
-        /* background: #fff; */
+        flex-wrap: wrap;
         background: rgba(248, 247, 247, 0.8);
         font-size: 18px;
-        /* text-align: left; */
+    }
+    .box{
+        width: 20%;
+        border:1px solid #ccc;
+        height: 150px;
+    }
+
+
+    /* #main{
+        display: flex;
+        flex-wrap: wrap;
+        background: rgba(248, 247, 247, 0.8);
+        font-size: 18px;
     }
     .left{
         width: 15%;
@@ -278,17 +288,24 @@
     .btns>button{
         display: block;
         margin-bottom: 10px;
-    }
+    } */
+
+
+
 </style>
 <script>
     var name = localStorage.getItem("name");   
     // console.log(name)
     $('#name').html(name);
     
-    var all = $('#all').html();
-    if(all<0){
-        $('#over').html('破产倒闭');
-        // console.log($('.right').find('.btn'));
-        $('.right').find('.btn').addClass("disabled");
+    for(let i=0;i<20;i++){
+        $('#main').append('<div class="box"><button type="button" class="btn btn-success">创建</button></div>')
     }
+    
+    // var all = $('#all').html();
+    // if(all<0){
+    //     $('#over').html('破产倒闭');
+    //     // console.log($('.right').find('.btn'));
+    //     $('.right').find('.btn').addClass("disabled");
+    // }
 </script>
