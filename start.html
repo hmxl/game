@@ -15,10 +15,10 @@
 
     <body>
         <div class="col-xs-10 col-xs-offset-1 container">
-            <h3 style='text-align: center'>村鸟网络商学院-沙盘游戏</h3>
+            <h3 style='text-align: center'>村鸟网络商学院-沙盘</h3>
             <h4>国家名：<span id="name"></span>
                 &nbsp;&nbsp;&nbsp;&nbsp;银币总额：<span id="all" class="text-danger">1000000</span>
-                &nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 16px">建造场地(20)</span>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 16px" id="total">建造场地(20)</span>
             </h4>            
             <form class="form-horizontal row">
                 <div class="form-group col-xs-5">
@@ -237,6 +237,7 @@
         let parent = $(that).parent();
         parent.empty();//去除创建按钮
         create(type,parent,product,flag);
+        $('#total').text('铁矿总量：1000 木材总量：1000 石料总量：1000 农用田总量：1000 士兵总量：1000  农民总量：1000')
     }
     // var all = $('#all').html();
     // if(all<0){
@@ -262,7 +263,6 @@
         // console.log(html);
         //填充渲染结果到content
         parent.html(html)
-        // document.getElementById('content').innerHTML = html;
     }
 
     function upgrade(that){
