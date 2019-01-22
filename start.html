@@ -9,19 +9,31 @@
         <link rel="stylesheet" href="./font/iconfont.css">
         <script src="./jQuery/jquery-1.11.2.min.js"></script>
         <script src="./bootstrap/js/bootstrap.js"></script>
+        <script src="./artTemplate/dist/template.js"></script>
         <title>Document</title>
     </head>
 
     <body>
         <div class="col-xs-10 col-xs-offset-1 container">
             <h3 style='text-align: center'>村鸟网络商学院-沙盘游戏</h3>
-            <h4>国家名：<span id="name"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 16px">建造场地(20)</span>
-
-            </h4>
+            <h4>国家名：<span id="name"></span>
+                &nbsp;&nbsp;&nbsp;&nbsp;银币总额：<span id="all" class="text-danger">1000000</span>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 16px">建造场地(20)</span>
+            </h4>            
+            <form class="form-horizontal row">
+                <div class="form-group col-xs-5">
+                    <label for="createType" class="col-sm-3 control-label">创建类型：</label>
+                    <div class="col-sm-6">
+                        <select class="form-control" id="createType">
+                            <option>请选择</option>
+                            <option>大学</option>
+                        </select>
+                    </div>
+                    <button type="button" class="btn btn-link" data-toggle="modal" data-target="#myModal">游戏规则</button>
+                </div>
+            </form>
             <div id="main">
             </div>
-            <!-- <div style="margin: 10px 0;">备注：100万银币：当总资产低于初始资产的40%时，国家宣告灭亡</div> -->
-            <button type="button" class="btn btn-link" data-toggle="modal" data-target="#myModal">游戏规则</button>
         </div>
 
         <div class="modal fade " id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
@@ -66,6 +78,7 @@
         /* position: absolute;
         top: 50%;
         transform: translateY(-50%); */
+        padding-bottom:20px;
     }
 
     .container>h3 {
@@ -90,87 +103,172 @@
         width: 20%;
         border:1px solid #ccc;
         height: 150px;
-    }
-
-
-    /* #main{
-        display: flex;
-        flex-wrap: wrap;
-        background: rgba(248, 247, 247, 0.8);
-        font-size: 18px;
-    }
-    .left{
-        width: 15%;
-        border:1px solid #ccc;
         position: relative;
     }
-    .left>div{
+    .init-create{
         position: absolute;
         top:50%;
         left:50%;
-        transform: translate(-50%,-50%);
-        white-space:nowrap;
+        transform: translate(-50%,-50%)
     }
-    .right{
-        width: 85%;
-        display: flex;
-        flex-wrap: wrap;
+
+
+    .top{
+        /* display: flex; */
+        padding: 5px 10px;
+        border-bottom: 1px solid #ccc;
     }
-    .right>div{
-        width: 20%;
-        height: 50%;
-        border:1px solid #ccc;
-        padding: 20px 5px;
+    .top>i{
+        font-size: 18px;
+    }
+    .no-reached{
+        color: #ccc;
+    }
+    .reached{
+        color:#f0ad4e;
+    }
+    .bottom{
+        padding: 10px;
+        font-size: 14px;
         position: relative;
     }
-    .title{
-        font-size: 20px;
+    .inner1{
+        display: flex;
+        justify-content: space-between;
     }
-    .title>img{
-        width: 35px;
-        height: 35px;
-        vertical-align: middle;
+    .inner2{
+        margin:10px 0px;
     }
-    .title>span{
-        vertical-align: middle;
-    }
-    .title>span:nth-child(3){
-        margin-left: -10px;
-    }
-    .time{
-        font-size: 14px;
-        position: absolute;
-        bottom: 10px;
-    }
-    .num{
-        font-size: 15px;
-        bottom: 30px;
-    }
-    .btns{
+    .inner2>div>button{
         position: absolute;
         right:10px;
+        top:40px
     }
-    .btns>button{
-        display: block;
-        margin-bottom: 10px;
-    } */
-
-
 
 </style>
+<script id="created" type="text/html">
+    <div class="top">
+        <span class="type">{{type}}</span>
+        {{if flag}}
+        {{if level < 2}}
+        <i class="iconfont icon-xingxing reached"></i>
+        <i class="iconfont icon-xingxing no-reached"></i>
+        <i class="iconfont icon-xingxing no-reached"></i>
+        {{else if level < 3}}
+        <i class="iconfont icon-xingxing reached"></i>
+        <i class="iconfont icon-xingxing reached"></i>
+        <i class="iconfont icon-xingxing no-reached"></i>
+        {{else}}
+        <i class="iconfont icon-xingxing reached"></i>
+        <i class="iconfont icon-xingxing reached"></i>
+        <i class="iconfont icon-xingxing reached"></i>
+        {{/if}}
+        {{/if}}
+    </div>
+    <div class="bottom">
+        {{if flag}}
+        <div class="inner1">
+            <div>{{type}}(<span class="text-danger">{{num}}</span>)个</div><div>生产效率：{{efficiency}}个/分钟</div>
+        </div>
+        {{/if}}
+        <div class="inner2">
+            {{if flag}}
+            <div>{{product}}总量：<span class="text-danger">{{count}}</span>个</div>
+            {{else}}
+            <div style="font-size: 12px;">
+                已达到升级条件<br>
+                铁矿总量—100<br>
+                木材总量—1500<br>
+                石料总量—2400<br>
+            </div>
+            {{/if}}
+            <div>
+                {{if upgrade}}
+                <button type="button" class="btn btn-warning" onclick="upgrade(this)">升级</button>
+                {{else}}
+                <button type="button" class="btn btn-warning disabled">升级</button>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</script>
 <script>
     var name = localStorage.getItem("name");   
     // console.log(name)
     $('#name').html(name);
     
+    var createType = [
+            {type:'铁矿场',product:'铁矿'},
+            {type:'木材场',product:'木材'},
+            {type:'石料场',product:'石料'},
+            {type:'农用田',product:'粮食'},
+            {type:'农民',product:'农民'},
+            {type:'兵营',product:'兵营'},
+            {type:'矿工',product:'建矿'}
+        ];
+    for(let i=0;i<createType.length;i++){
+        $('#createType').append('<option>'+createType[i].type+'</option>');
+    }
+
     for(let i=0;i<20;i++){
-        $('#main').append('<div class="box"><button type="button" class="btn btn-success">创建</button></div>')
+        $('#main').append('<div class="box"><button type="button" class="btn btn-success init-create" onclick="initCreate(this)">创建</button></div>')
     }
     
+
+
+    // 初始创建
+    function initCreate(that){
+        // console.log($(that).parent())
+        let type = $('#createType').val();
+        // alert(type)
+        if(type == "请选择"){
+            alert('请选择创建类型！');
+            return;
+        }
+        let product;
+        let flag = false;
+        for(let a in createType){
+            if(createType[a].type == type){
+                product = createType[a].product;
+                flag = true;
+                break;
+            }
+        }
+        let parent = $(that).parent();
+        parent.empty();//去除创建按钮
+        create(type,parent,product,flag);
+    }
     // var all = $('#all').html();
     // if(all<0){
     //     $('#over').html('破产倒闭');
     //     // console.log($('.right').find('.btn'));
     //     $('.right').find('.btn').addClass("disabled");
     // }
+
+    function create(type,parent,product,flag){
+        let data = {
+            type: type,
+            level: 1,
+            num:1,
+            efficiency:3,
+            product:product,
+            count:0,
+            upgrade:true,
+            flag:flag
+        };
+        //根据id编译模板在进行渲染
+        let html = template('created',data);
+        //打印渲染结果
+        // console.log(html);
+        //填充渲染结果到content
+        parent.html(html)
+        // document.getElementById('content').innerHTML = html;
+    }
+
+    function upgrade(that){
+        $(that).html('建造中');
+        $(that).addClass('disabled')
+    }
+    
+    
 </script>
