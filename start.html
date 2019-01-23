@@ -37,8 +37,6 @@
                     <div class="col-sm-6">
                         <select class="form-control" id="createType">
                             <option>请选择</option>
-                            <option>大学</option>
-                            <option>科技馆</option>
                         </select>
                     </div>
                     <button type="button" class="btn btn-link" data-toggle="modal" data-target="#myModal">游戏规则</button>
@@ -48,24 +46,39 @@
             </div>
         </div>
 
-        <div class="modal fade " id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">游戏规则</h4>
-                </div>
-                <div class="modal-body">
-                    <p>1、初始金币为100万，民营、铁矿、林场、采石场、耕田、初始值等级与数量默认为0</p>
-                    <p>2、100万银币：当总资产低于初始资产的40%时，国家宣告灭亡</p>
-                    <p>3、建造与升级初始状态默认为不可点击</p>
-                    <p>4、每个小组选择一个国家后，根据沙盘操作情况，后台实时统计各个国家的数据统计信息</p>
+        <div class="modal fade " id="myModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">游戏规则</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>1、初始金币为100万，民营、铁矿、林场、采石场、耕田、初始值等级与数量默认为0</p>
+                        <p>2、100万银币：当总资产低于初始资产的40%时，国家宣告灭亡</p>
+                        <p>3、建造与升级初始状态默认为不可点击</p>
+                        <p>4、每个小组选择一个国家后，根据沙盘操作情况，后台实时统计各个国家的数据统计信息</p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <script type="text/javascript" src="./animation/js/index.js"></script>
 
+        <div class="modal fade " id="noSelected" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content" style="position: relative">
+                    <!-- <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel"></h4>
+                    </div> -->
+                    <div class="modal-body text-center">
+                        <p>请选择建造类型！</p>
+                    </div>
+                    <div class="modal-footer" style="padding: 10px;border-top: none">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </body>
 
 </html>
@@ -207,6 +220,7 @@
         </div>
     </div>
 </script>
+<script type="text/javascript" src="./animation/js/index.js"></script>
 <script>
     var name = localStorage.getItem("name");
     $('#name').html(name);
@@ -218,7 +232,10 @@
             {type:'农用田',product:'粮食'},
             {type:'农民',product:'农民'},
             {type:'兵营',product:'兵营'},
-            {type:'矿工',product:'建矿'}
+            {type:'矿工',product:'建矿'},
+            {type:'大学'},
+            {type:'科技馆'},
+
         ];
     for(let i=0;i<createType.length;i++){
         $('#createType').append('<option>'+createType[i].type+'</option>');
@@ -236,7 +253,8 @@
         let type = $('#createType').val();
         // alert(type)
         if(type == "请选择"){
-            alert('请选择创建类型！');
+            // alert('请选择创建类型！');
+            $('#noSelected').modal('show');
             return;
         }
         let product;
@@ -244,7 +262,11 @@
         for(let a in createType){
             if(createType[a].type == type){
                 product = createType[a].product;
-                flag = true;
+                if(createType[a].hasOwnProperty('product')){
+                    flag = true;
+                }else{
+                    flag = false;
+                }
                 break;
             }
         }
@@ -272,7 +294,7 @@
             product:product,
             count:0,
             upgrade:true,
-            flag:flag
+            flag:flag,//判断是否为大学科技馆，是为false
         };
         //根据id编译模板在进行渲染
         let html = template('created',data);
@@ -286,6 +308,6 @@
         $(that).html('建造中');
         $(that).addClass('disabled')
     }
-    
-    
 </script>
+
+
