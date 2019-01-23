@@ -66,10 +66,6 @@
         <div class="modal fade " id="noSelected" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-sm" role="document">
                 <div class="modal-content" style="position: relative">
-                    <!-- <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel"></h4>
-                    </div> -->
                     <div class="modal-body text-center">
                         <p>请选择建造类型！</p>
                     </div>
@@ -210,9 +206,8 @@
             </div>
             {{/if}}
             <div>
-                
                 {{if upgrade}}
-                <button type="button" class="btn btn-warning" onclick="upgrade(this)">升级</button>
+                <button type="button" class="btn btn-warning" onclick="upgrade(this,'{{type}}')">升级</button>
                 {{else}}
                 <button type="button" class="btn btn-warning disabled">升级</button>
                 {{/if}}
@@ -235,7 +230,6 @@
             {type:'矿工',product:'建矿'},
             {type:'大学'},
             {type:'科技馆'},
-
         ];
     for(let i=0;i<createType.length;i++){
         $('#createType').append('<option>'+createType[i].type+'</option>');
@@ -274,26 +268,20 @@
         let parent = $(that).parent();
         setTimeout(()=>{
             parent.empty();//去除创建按钮
-            create(type,parent,product,flag);
+            create(parent,type,1,0,3,product,0,true,flag);
         },1000)
         $('#total').text('铁矿总量：1000 木材总量：1000 石料总量：1000 农用田总量：1000 士兵总量：1000  农民总量：1000')
     }
-    // var all = $('#all').html();
-    // if(all<0){
-    //     $('#over').html('破产倒闭');
-    //     // console.log($('.right').find('.btn'));
-    //     $('.right').find('.btn').addClass("disabled");
-    // }
 
-    function create(type,parent,product,flag){
+    function create(parent,type,level,num,efficiency,product,count,upgrade,flag){
         let data = {
-            type: type,
-            level: 1,
-            num:1,
-            efficiency:3,
-            product:product,
-            count:0,
-            upgrade:true,
+            type: type,//创建类型
+            level: level,//等级
+            num: num,//改类型个数
+            efficiency: efficiency,//该等级效率
+            product:product,//产物名称
+            count:count,//产量
+            upgrade:upgrade,//是否可以升级
             flag:flag,//判断是否为大学科技馆，是为false
         };
         //根据id编译模板在进行渲染
@@ -304,9 +292,9 @@
         parent.html(html)
     }
 
-    function upgrade(that){
-        $(that).html('建造中');
-        $(that).addClass('disabled')
+    function upgrade(that,type){
+        // console.log(type)
+        $(that).html('建造中').addClass('disabled');
     }
 </script>
 
